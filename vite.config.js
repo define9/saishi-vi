@@ -10,8 +10,13 @@ export default defineConfig({
       entry: 'src/main.js',
       userscript: {
         icon: 'https://vitejs.dev/logo.svg',
+        version: '0.0.1',
         namespace: 'npm/vite-plugin-monkey',
-        match: ['https://www.google.com/'],
+        match: [
+          '*://saishi.cnki.net/exam/*',
+          '*://saishi.cnki.net/m/exam/*',
+          '*://saishi.cnki.net/PaperIndex/*',
+        ],
       },
       build: {
         externalGlobals: {
@@ -20,4 +25,12 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://qdu-soft.syhu.com.cn/api',
+        changeOrigin: true,
+      }
+    }
+  }
 });
