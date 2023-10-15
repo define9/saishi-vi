@@ -1,9 +1,12 @@
 import axios from 'axios'
 
-const instance = axios.create({
-	timeout: 60 * 1000
+axios.defaults.timeout = 50000
+
+axios.interceptors.request.use(config => {
+  // ...
+  return config
+}, error => {
+  return Promise.error(error)
 })
 
-
-
-export default instance
+export default axios
