@@ -3,6 +3,7 @@ import { ref } from "vue";
 
 const props = defineProps({
   disabled: { type: Boolean, default: false },
+  target: { type: String, default: '' },
 });
 
 const dragPos = {
@@ -87,17 +88,22 @@ const onTouchMove = (e) => {
 };
 
 const onMousedown = (e) => {
-  if (props.disabled) return;
+  if (props.disabled)
+    return;
   //设置事件对象
   let event1 = e || window.event;
+  let clz = e.target.className.split(' ')
+  clz = clz.concat(e.target.parentElement.className.split(' '))
+  if (clz.indexOf(props.target) < 0)
+    return;
 
   //鼠标移动事件调用函数
   let move = function (e) {
     //设置时间对象
     let event = e || window.event;
 
-    dragPos.left = event.clientX - event1.offsetX;
-    dragPos.top = event.clientY - event1.offsetY;
+    dragPos.left = Math.max(event.clientX - event1.offsetX, 0);
+    dragPos.top = Math.max(event.clientY - event1.offsetY, 0);
 
     const width = dragBoxRef.value.offsetWidth;
     const height = dragBoxRef.value.offsetHeight;
@@ -147,6 +153,8 @@ const onMousedown = (e) => {
   right: 30px;
   overflow: hidden;
   z-index: 99;
+  border-radius: 5px;
 }
+
 </style>
 

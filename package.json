@@ -9,7 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "ant-design-vue": "4.x",
     "axios": "^1.5.1",
+    "pinia": "^2.1.7",
+    "pinia-plugin-persist": "^1.0.0",
+    "pinia-plugin-persistedstate": "^3.2.0",
     "vue": "^3.3.4"
   },
   "devDependencies": {
