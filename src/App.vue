@@ -11,11 +11,11 @@ import Content from "./components/Content.vue";
         <Header></Header>
       </div>
       <a-layout-content>
-        <Content></Content>
+        <Content ></Content>
       </a-layout-content>
       <a-row>
         <a-col :offset="5">
-          powered by 
+          powered by
           <a href="https://qdu-soft.syhu.com.cn/" target="_blank">qdu-soft</a>
         </a-col>
       </a-row>
@@ -24,9 +24,8 @@ import Content from "./components/Content.vue";
 </template>
 
 <style scoped>
-
 .header {
-  background-color: chartreuse;
+  background-color: #38a50d;
   padding: 7px;
   text-align: center;
 }
@@ -34,5 +33,4 @@ import Content from "./components/Content.vue";
 .ant-layout-content {
   margin: 5px;
 }
-
 </style>

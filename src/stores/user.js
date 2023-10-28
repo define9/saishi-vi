@@ -31,7 +31,24 @@ export const useUserStore = defineStore({
       this.nick = ""
       this.email = ""
       this.login = false
+
+      localStorage.removeItem("user")
     },
   },
-  persist: true,
+  persist: {
+    key: "user",
+    storage: sessionStorage,
+    afterRestore: (ctx) => {
+      var local = localStorage.getItem(ctx.store.$id)
+      console.log(ctx);
+      if (!local && ctx.store.login) {
+        localStorage.setItem(ctx.store.$id, JSON.stringify(ctx.store))
+      }
+      if (local && !ctx.store.login) {
+        let data = JSON.parse(local)
+        data.login = true
+        ctx.store.updateAll(data)
+      }
+    },
+  },
 })
